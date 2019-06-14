@@ -23,7 +23,7 @@ namespace ProyectoOracle.Controlador
             String tabla = typeof(T).Name;
             FormatearComando();
             String val = "";
-            SetFieldsForCommand<T>(out val, objeto);
+            SetFieldsForInsert<T>(out val, objeto);
             if (autoId)
             {
                 val = "null," + val;
@@ -67,14 +67,7 @@ namespace ProyectoOracle.Controlador
             String tabla = typeof(T).Name;
             String condicion = "";
             String val = "";
-            if (id is String)
-            {
-                SetFieldsForCommand<T>(out condicion, out val, id, typeof(T).GetProperties()[0], true);
-            }
-            else
-            {
-                SetFieldsForCommand<T>(out condicion, out val, id);
-            }
+            SetFieldsForSelect<T>(out condicion, out val, id, typeof(T).GetProperties()[0], id is String);
             buscar = buscar.Replace("VALORES", val);
             buscar = buscar.Replace("TABLA", tabla);
             buscar = buscar.Replace("CONDICION", condicion);
@@ -118,7 +111,7 @@ namespace ProyectoOracle.Controlador
             String tabla = typeof(T).Name;
             FormatearComando();
             String val = "";
-            SetFieldsForCommand(out val);
+            SetFieldsForAll(out val);
             buscar = buscar.Replace("VALORES", val);
             buscar = buscar.Replace("TABLA", tabla);
             buscar = buscar.Replace("WHERE CONDICION", "");
@@ -141,7 +134,10 @@ namespace ProyectoOracle.Controlador
                 while (dReader.Read())
                 {
                     obj[l] = new Object[typeof(T).GetProperties().Length];
-                    dReader.GetValues(obj[l]);
+                    for (int j = 0; j < typeof(T).GetProperties().Length; j++)
+                    {
+                        obj[l][j] = dReader.GetValue(j);
+                    }
                     l++;
                 }
                 dReader.Close();
@@ -153,7 +149,23 @@ namespace ProyectoOracle.Controlador
                     t = new T();
                     foreach (var item in m)
                     {
-                        item.SetValue(t, ob[l]);
+                        try
+                        {
+                            item.SetValue(t, ob[l]);
+                        }
+                        catch (ArgumentException e)
+                        {
+                            try
+                            {
+                                Char c = Char.Parse((String)ob[l]);
+                                item.SetValue(t, c);
+                            }
+                            catch (ArgumentException ex)
+                            {
+                                bool b = ((String)ob[l]).Equals("1");
+                                item.SetValue(t, b);
+                            }
+                        }
                         l++;
                     }
                     lista.Add(t);
@@ -174,7 +186,7 @@ namespace ProyectoOracle.Controlador
             FormatearComando();
             String val = "";
             String condicion = "";
-            SetFieldsForCommand<T>(out condicion, out val, objeto: objeto, idIsString: b);
+            SetFieldsForUpdate<T>(out condicion, out val, objeto: objeto, idIsString: b);
             actualizar = actualizar.Replace("VALORES", val);
             actualizar = actualizar.Replace("TABLA", tabla);
             actualizar = actualizar.Replace("CONDICION", condicion);
@@ -244,23 +256,23 @@ namespace ProyectoOracle.Controlador
             borrar = "DELETE FROM TABLA WHERE CONDICION";
 
         }
-        private void SetFieldsForCommand<T>(out String id, out String valores, dynamic idValue, PropertyInfo pi, bool idIsString = false) where T : class
+        private void SetFieldsForSelect<T>(out String id, out String valores, dynamic idValue, PropertyInfo pi, bool idIsString = false) where T : class
         {//SELECT
-            SetFieldsForCommand(out valores);
+            SetFieldsForAll(out valores);
             id = FormatId(pi.Name, idValue, idIsString);
         }
-        private void SetFieldsForCommand(out String valores)
+        private void SetFieldsForAll(out String valores)
         {//SELECT ALL
             valores = "*";
         }
-        private void SetFieldsForCommand<T>(out String id, out String valores, T objeto, bool idIsString = false) where T : class
+        private void SetFieldsForUpdate<T>(out String id, out String valores, T objeto, bool idIsString = false) where T : class
         {//UPDATE
             var miembros = typeof(T).GetProperties();
-            SetFieldsForCommand<T>(out valores, objeto, true);
+            SetFieldsForInsert<T>(out valores, objeto, true);
             var idValue = miembros[0].GetValue(objeto);
             id = FormatId(miembros[0].Name, idValue, idIsString);
         }
-        private void SetFieldsForCommand<T>(out String valores, T objeto, bool update = false) where T : class
+        private void SetFieldsForInsert<T>(out String valores, T objeto, bool update = false) where T : class
         {//INSERT
             var miembros = typeof(T).GetProperties();
             valores = "";
