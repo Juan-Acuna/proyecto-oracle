@@ -4,13 +4,48 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProyectoOracle.Vistas"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="AgregarPostulante">
+      mc:Ignorable="d"
+      Title="AgregarPostulante" Height="561" Width="797">
 
     <Grid>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="55,57,0,0" VerticalAlignment="Top" Width="134"/>
-        <TextBox HorizontalAlignment="Left" Height="24" Margin="194,57,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-
+        <Label Content="Rut" HorizontalAlignment="Left" Margin="55,57,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtRut" HorizontalAlignment="Left" Height="24" Margin="194,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Nombres" HorizontalAlignment="Left" Margin="55,102,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="24" Margin="194,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Apellidos" HorizontalAlignment="Left" Margin="55,147,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtApellido" HorizontalAlignment="Left" Height="24" Margin="194,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Fecha de nacimiento" HorizontalAlignment="Left" Margin="55,200,0,0" VerticalAlignment="Top" Width="134"/>
+        <DatePicker x:Name="dtNacimiento" HorizontalAlignment="Left" Margin="194,200,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Nacionalidad" HorizontalAlignment="Left" Margin="55,248,0,0" VerticalAlignment="Top" Width="134"/>
+        <ComboBox x:Name="cbNacionalidad" Text="Seleccione nacionalidad"  HorizontalAlignment="Left" Margin="194,248,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Chilena" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="Extranjera" HorizontalAlignment="Left" Width="118"/>
+        </ComboBox>
+        <Label Content="Titulo" HorizontalAlignment="Left" Margin="55,298,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtTitulo" HorizontalAlignment="Left" Height="24" Margin="194,298,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="N° cargas familiares" HorizontalAlignment="Left" Margin="55,348,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtCargas" HorizontalAlignment="Left" Height="24" Margin="194,348,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="chkIndigena" Content="Pertenece a pueblos originarios" HorizontalAlignment="Left" Margin="55,394,0,0" VerticalAlignment="Top"/>
+        <Label Content="Telefono trabajo" HorizontalAlignment="Left" Margin="441,57,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtFonoT" HorizontalAlignment="Left" Height="24" Margin="580,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Telefono casa" HorizontalAlignment="Left" Margin="441,102,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtFonoC" HorizontalAlignment="Left" Height="24" Margin="580,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Telefono movil" HorizontalAlignment="Left" Margin="441,147,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtFonoM" HorizontalAlignment="Left" Height="24" Margin="580,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Correo electronico" HorizontalAlignment="Left" Margin="441,200,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="24" Margin="580,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Direccion" HorizontalAlignment="Left" Margin="441,248,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtDireccion" HorizontalAlignment="Left" Height="24" Margin="580,248,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Codigo postal" HorizontalAlignment="Left" Margin="441,298,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtPostal" HorizontalAlignment="Left" Height="24" Margin="580,298,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="chkConyuge" Content="Casado" HorizontalAlignment="Left" Margin="441,354,0,0" VerticalAlignment="Top" Unchecked="ChkConyuge_Unchecked" Checked="ChkConyuge_Checked"/>
+        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="429,508,0,0" VerticalAlignment="Top" Width="146" Height="43" Click="BtnAgregar_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="598,508,0,0" VerticalAlignment="Top" Width="146" Height="43" Click="BtnCancelar_Click"/>
+        <StackPanel x:Name="spContenedor" HorizontalAlignment="Center" Height="124" Margin="580,348,69,89" VerticalAlignment="Center" Width="148">
+            <Label Content="Rut conyuge" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Canvas.Left="441" Canvas.Top="385"/>
+            <TextBox x:Name="txtRutC" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Nombre conyuge" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Canvas.Left="441" Canvas.Top="428"/>
+            <TextBox x:Name="txtNombreC" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Canvas.Left="580" Canvas.Top="428"/>
+        </StackPanel>
     </Grid>
 </Page>

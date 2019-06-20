@@ -23,6 +23,10 @@ namespace ProyectoOracle
         public MainWindow()
         {
             InitializeComponent();
+            SizeToContent = SizeToContent.WidthAndHeight;
+            ResizeMode = ResizeMode.NoResize;
+            NavFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+            NavFrame.Navigate(new ProyectoOracle.Vistas.Menu(this));
         }
     }
 }

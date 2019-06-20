@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ProyectoOracle.Modelos;
+using ProyectoOracle.Controlador;
+
 
 namespace ProyectoOracle.Vistas
 {
@@ -20,9 +13,45 @@ namespace ProyectoOracle.Vistas
     /// </summary>
     public partial class AgregarPostulante : Page
     {
-        public AgregarPostulante()
+        MainWindow window;
+        public AgregarPostulante(MainWindow w)
         {
             InitializeComponent();
+            spContenedor.IsEnabled = false;
+            spContenedor.Opacity = 0;
+            window = w;
+        }
+
+        private void ChkConyuge_Checked(object sender, RoutedEventArgs e)
+        {
+            ControlPanel(true);
+        }
+
+        private void ChkConyuge_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ControlPanel(false);
+        }
+        private void ControlPanel(bool b)
+        {
+            double d = 0;
+            if (b)
+            {
+                d = 1;
+            }
+            spContenedor.IsEnabled = b;
+            spContenedor.Opacity = d;
+        }
+
+        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            window.NavFrame.GoBack();
+        }
+
+        private void BtnAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            //primero se insertan los objetos.
+            //luego se retorna a la pagina anterior
+            window.NavFrame.GoBack();
         }
     }
 }

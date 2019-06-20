@@ -20,9 +20,11 @@ namespace ProyectoOracle.Vistas
     /// </summary>
     public partial class Menu : Page
     {
-        public Menu()
+        MainWindow win;
+        public Menu(MainWindow w)
         {
             InitializeComponent();
+            win = w;
         }
     }
 }
