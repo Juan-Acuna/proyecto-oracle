@@ -9,6 +9,8 @@
       Title="AgregarPostulante">
 
     <Grid>
-        
+        <Label Content="Label" HorizontalAlignment="Left" Margin="55,57,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="194,57,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Page>
