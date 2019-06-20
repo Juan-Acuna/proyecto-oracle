@@ -20,9 +20,36 @@ namespace ProyectoOracle.Vistas
     /// </summary>
     public partial class Postulantes : Page
     {
-        public Postulantes()
+        MainWindow win;
+        public Postulantes(MainWindow w)
         {
             InitializeComponent();
+            win = w;
+        }
+
+        private void BtnAgregar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnModificar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnBorrar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnVolver_Click(object sender, RoutedEventArgs e)
+        {
+            win.Back();
+        }
+
+        private void Tabla_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

@@ -14,6 +14,7 @@ namespace ProyectoOracle.Vistas
     public partial class AgregarPostulante : Page
     {
         MainWindow window;
+        ConexionOracle con = ConexionOracle.Conexion;
         public AgregarPostulante(MainWindow w)
         {
             InitializeComponent();
@@ -44,14 +45,50 @@ namespace ProyectoOracle.Vistas
 
         private void BtnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            window.NavFrame.GoBack();
+            window.Back();
         }
 
         private void BtnAgregar_Click(object sender, RoutedEventArgs e)
         {
+            bool b = true;
             //primero se insertan los objetos.
+            if (Convert.ToBoolean(chkConyuge.IsChecked))
+            {
+                Conyuge c = new Conyuge
+                {
+                    Rut_conyuge = txtRutC.Text,
+                    Nombre_completo = txtNombreC.Text
+                };
+                b = con.Insert(c, false);
+            }
+            if (!b)
+            {
+                //error
+            }
+            Postulante p = new Postulante
+            {
+                Rut = txtRut.Text,
+                Nombre_completo = txtNombre + " " + txtApellido,
+                Nacimiento = dtNacimiento.DisplayDate,
+                Nacionalidad = cbNacionalidad.SelectedValue.ToString(),
+                Titulo = txtTitulo.Text.Trim().Equals("") ? txtTitulo.Text : "Sin titulo profesional",
+                Cargas_familiares = Int32.Parse(txtCargas.Text),
+                P_indigena = Convert.ToBoolean(chkIndigena.IsChecked),
+                Fono_c = Int32.Parse(txtFonoC.Text),
+                Fono_t = Int32.Parse(txtFonoT.Text),
+                Fono_m = Int32.Parse(txtFonoM.Text),
+                Email = txtEmail.Text,
+                Direccion = txtDireccion.Text,
+                Codigo_postal = Int32.Parse(txtPostal.Text),
+                Rut_conyuge = Convert.ToBoolean(chkConyuge.IsChecked)?txtRutC.Text:"N/A"
+            };
+            b = con.Insert(p, false);
+            if (!b)
+            {
+                //error
+            }
             //luego se retorna a la pagina anterior
-            window.NavFrame.GoBack();
+            window.Back();
         }
     }
 }

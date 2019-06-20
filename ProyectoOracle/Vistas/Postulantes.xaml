@@ -9,6 +9,11 @@
       Title="Postulantes">
 
     <Grid>
-        
+        <DataGrid Name="tabla" HorizontalAlignment="Left" Height="298" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" MouseLeftButtonDown="Tabla_MouseLeftButtonDown"/>
+        <Button Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="15,391,0,0" VerticalAlignment="Top" Width="150" Height="49" Click="BtnAgregar_Click"/>
+        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="190,391,0,0" VerticalAlignment="Top" Width="150" Height="49" Click="BtnModificar_Click"/>
+        <Button Name="btnBorrar" Content="Eliminar" HorizontalAlignment="Left" Margin="362,391,0,0" VerticalAlignment="Top" Width="150" Height="49" Click="BtnBorrar_Click"/>
+        <Button Name="btnVolver" Content="Volver" HorizontalAlignment="Left" Margin="640,391,0,0" VerticalAlignment="Top" Width="150" Height="49" Click="BtnVolver_Click"/>
+
     </Grid>
 </Page>

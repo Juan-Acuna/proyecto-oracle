@@ -28,5 +28,13 @@ namespace ProyectoOracle
             NavFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
             NavFrame.Navigate(new ProyectoOracle.Vistas.Menu(this));
         }
+        public void GoTo(Page pagina)
+        {
+            NavFrame.Navigate(pagina);
+        }
+        public void Back()
+        {
+            NavFrame.GoBack();
+        }
     }
 }

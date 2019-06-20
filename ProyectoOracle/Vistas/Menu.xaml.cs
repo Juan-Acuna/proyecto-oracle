@@ -26,5 +26,15 @@ namespace ProyectoOracle.Vistas
             InitializeComponent();
             win = w;
         }
+
+        private void BtnPostulaciones_Click(object sender, RoutedEventArgs e)
+        {
+            win.GoTo(new Postulaciones(win));
+        }
+
+        private void BtnPostulantes_Click(object sender, RoutedEventArgs e)
+        {
+            win.GoTo(new Postulantes(win));
+        }
     }
 }

@@ -9,7 +9,7 @@
       Title="Menu">
 
     <Grid>
-        <Button Content="Postulaciones" HorizontalAlignment="Left" Margin="56,63,0,0" VerticalAlignment="Top" Width="113" Height="39"/>
-        <Button Content="Postulantes" HorizontalAlignment="Left" Margin="241,63,0,0" VerticalAlignment="Top" Width="113" Height="39"/>
+        <Button Content="Postulaciones" Name="btnPostulaciones" HorizontalAlignment="Left" Margin="56,63,0,0" VerticalAlignment="Top" Width="113" Height="39" Click="BtnPostulaciones_Click"/>
+        <Button Content="Postulantes" Name="btnPostulantes" HorizontalAlignment="Left" Margin="241,63,0,0" VerticalAlignment="Top" Width="113" Height="39" Click="BtnPostulantes_Click"/>
     </Grid>
 </Page>
