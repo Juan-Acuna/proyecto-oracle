@@ -65,6 +65,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Vistas\AgregarInforme.xaml.cs">
+      <DependentUpon>AgregarInforme.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\AgregarPostulacion.xaml.cs">
+      <DependentUpon>AgregarPostulacion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\AgregarPostulante.xaml.cs">
+      <DependentUpon>AgregarPostulante.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\AgregarVivienda.xaml.cs">
+      <DependentUpon>AgregarVivienda.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Informes.xaml.cs">
+      <DependentUpon>Informes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Postulaciones.xaml.cs">
+      <DependentUpon>Postulaciones.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Postulantes.xaml.cs">
+      <DependentUpon>Postulantes.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,6 +104,38 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Vistas\AgregarInforme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\AgregarPostulacion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\AgregarPostulante.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\AgregarVivienda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Informes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Postulaciones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Postulantes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modelos\Banco.cs" />
@@ -121,8 +177,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Vistas\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
