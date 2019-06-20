@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProyectoOracle.Controlador;
+using ProyectoOracle.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,26 +22,44 @@ namespace ProyectoOracle.Vistas
     /// </summary>
     public partial class Postulantes : Page
     {
+        Postulante p;
         MainWindow win;
+        ConexionOracle con = ConexionOracle.Conexion;
+        List<Postulante> lista;
         public Postulantes(MainWindow w)
         {
             InitializeComponent();
             win = w;
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            lista = con.GetAll<Postulante>();
         }
 
         private void BtnAgregar_Click(object sender, RoutedEventArgs e)
         {
-
+            win.GoTo(new AgregarPostulante(win));
+            Refresh();
         }
 
         private void BtnModificar_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!con.Update(p))
+            {
+                //error
+            }
+            Refresh();
         }
 
         private void BtnBorrar_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!con.Delete(p))
+            {
+                //error
+            }
+            Refresh();
         }
 
         private void BtnVolver_Click(object sender, RoutedEventArgs e)
@@ -49,7 +69,12 @@ namespace ProyectoOracle.Vistas
 
         private void Tabla_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            
+        }
 
+        private void Tabla_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            p = ((Postulante)e.Row.Item);
         }
     }
 }
