@@ -97,7 +97,7 @@ namespace ProyectoOracle.Vistas
 
         private void Tabla_CurrentCellChanged(object sender, EventArgs e)
         {
-            if (!status)
+            if (!status && ((DataGrid)sender).CurrentCell.Item is Postulante)
             {
                 p = ((DataGrid)sender).CurrentCell.Item as Postulante;
             }
