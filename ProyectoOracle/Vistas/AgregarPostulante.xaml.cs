@@ -14,13 +14,15 @@ namespace ProyectoOracle.Vistas
     public partial class AgregarPostulante : Page
     {
         MainWindow window;
+        Page pagina;
         ConexionOracle con = ConexionOracle.Conexion;
-        public AgregarPostulante(MainWindow w)
+        public AgregarPostulante(MainWindow w,Page pagina)
         {
             InitializeComponent();
             spContenedor.IsEnabled = false;
             spContenedor.Opacity = 0;
             window = w;
+            this.pagina = pagina;
         }
 
         private void ChkConyuge_Checked(object sender, RoutedEventArgs e)
@@ -62,16 +64,17 @@ namespace ProyectoOracle.Vistas
                 b = con.Insert(c, false);
             }
             if (!b)
-            {
+            { 
                 //error
+                return;
             }
             Postulante p = new Postulante
             {
                 Rut = txtRut.Text,
-                Nombre_completo = txtNombre + " " + txtApellido,
+                Nombre_completo = txtNombre.Text + " " + txtApellido.Text,
                 Nacimiento = dtNacimiento.DisplayDate,
-                Nacionalidad = cbNacionalidad.SelectedValue.ToString(),
-                Titulo = txtTitulo.Text.Trim().Equals("") ? txtTitulo.Text : "Sin titulo profesional",
+                Nacionalidad = ((ComboBoxItem)cbNacionalidad.SelectedValue).Content.ToString(),
+                Titulo = txtTitulo.Text.Trim().Equals("") ? "Sin titulo profesional" : txtTitulo.Text,
                 Cargas_familiares = Int32.Parse(txtCargas.Text),
                 P_indigena = Convert.ToBoolean(chkIndigena.IsChecked),
                 Fono_c = Int32.Parse(txtFonoC.Text),
@@ -80,14 +83,16 @@ namespace ProyectoOracle.Vistas
                 Email = txtEmail.Text,
                 Direccion = txtDireccion.Text,
                 Codigo_postal = Int32.Parse(txtPostal.Text),
-                Rut_conyuge = Convert.ToBoolean(chkConyuge.IsChecked)?txtRutC.Text:"N/A"
+                Rut_conyuge = Convert.ToBoolean(chkConyuge.IsChecked)?txtRutC.Text:null
             };
             b = con.Insert(p, false);
             if (!b)
             {
                 //error
+                return;
             }
             //luego se retorna a la pagina anterior
+            ((Postulantes)pagina).Refresh();
             window.Back();
         }
     }

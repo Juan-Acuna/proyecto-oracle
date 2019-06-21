@@ -20,7 +20,7 @@ namespace ProyectoOracle.Modelos
         public int? Fono_m { get; set; }
         public String Email { get; set; }
         public String Direccion { get; set; }
-        public int Codigo_postal { get; set; }
+        public Int64 Codigo_postal { get; set; }
         public String Rut_conyuge { get; set; }
     }
 }

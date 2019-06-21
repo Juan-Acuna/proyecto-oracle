@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ProyectoOracle.Vistas
 {
@@ -25,39 +26,60 @@ namespace ProyectoOracle.Vistas
         Postulante p;
         MainWindow win;
         ConexionOracle con = ConexionOracle.Conexion;
-        List<Postulante> lista;
+        bool status = false;
         public Postulantes(MainWindow w)
         {
             InitializeComponent();
             win = w;
             Refresh();
-        }
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Tick += (s, a) =>
+            {
+                if (status)
+                {
+                    if (MessageBox.Show("¿Desea Guardar los cambios efectuados?", "Postulante modificado", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
 
-        private void Refresh()
+                        Actualizar();
+                        Refresh();
+                    }
+                    else
+                    {
+                        Refresh();
+                    }
+                    status = false;
+                }
+            };
+            timer.Start();
+        }
+        public void Refresh()
         {
-            lista = con.GetAll<Postulante>();
+            var lista = con.GetAll<Postulante>();
+            tabla.ItemsSource = lista;
         }
 
         private void BtnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            win.GoTo(new AgregarPostulante(win));
+            win.GoTo(new AgregarPostulante(win,this));
             Refresh();
         }
 
-        private void BtnModificar_Click(object sender, RoutedEventArgs e)
+        private void Actualizar()
         {
             if (!con.Update(p))
             {
                 //error
+                return;
             }
             Refresh();
         }
-
         private void BtnBorrar_Click(object sender, RoutedEventArgs e)
         {
             if (!con.Delete(p))
             {
                 //error
+                return;
             }
             Refresh();
         }
@@ -67,14 +89,18 @@ namespace ProyectoOracle.Vistas
             win.Back();
         }
 
-        private void Tabla_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
-
         private void Tabla_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             p = ((Postulante)e.Row.Item);
+            status = true;
+        }
+
+        private void Tabla_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (!status)
+            {
+                p = ((DataGrid)sender).CurrentCell.Item as Postulante;
+            }
         }
     }
 }

@@ -13,8 +13,8 @@ namespace ProyectoOracle.Controlador
         private static String USER = "proyecto_oracle";
         private static String PASSWD = "oracle123";
         private static String strConexion = "DATA SOURCE=" + SOURCE + ";USER ID=" + USER + ";PASSWORD=" + PASSWD + ";";
-        private static ConexionOracle _instance = new ConexionOracle();
         private static OracleConnection con = new OracleConnection(strConexion);
+        private static ConexionOracle _instance = new ConexionOracle();
         private ConexionOracle()
         {
             con.Open();
